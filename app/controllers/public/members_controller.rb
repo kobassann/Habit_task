@@ -1,5 +1,9 @@
 class Public::MembersController < ApplicationController
+
   def show
+    @task = Task.new
+    @tasks = Task.all
+    @member = Member.find(params[:id])
   end
 
   def edit

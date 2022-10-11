@@ -1,4 +1,35 @@
 <h1>マイタスク</h1>
-<%= month_calendar do |date| %>
+<%= month_calendar tasks: @tasks do |date, tasks| %>
   <%= date.day %>
+  
+  <%= tasks.each do |task| %>
+  <div><%= task.content %></div>
+  <% end %>
 <% end %>
+
+<div class="container">
+  <div class="text-center">
+  <%= form_with model:@task, local:true do |f| %>
+
+    <div class="form-group col-xs-9">
+      <%= f.label :"　日時　", class: "col-sm-1 pr-2" %>
+      <%= f.datetime_select :start_time %>
+    </div>
+    
+    <div class="form-group col-xs-9">
+      <%= f.label :"タスク内容", class: "col-sm-2" %>
+      <%= f.text_field :content, class: "col-sm-3" %>
+    </div>
+    
+    <div class="form-group col-xs-9">
+      <%= f.label :"メモ", class: "col-sm-2" %>
+      <%= f.text_field :memo, class: "col-sm-3" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.submit :"タスクを登録", class: 'btn btn-success' %>
+    </div>
+
+  <% end %>
+  </div>
+</div>
