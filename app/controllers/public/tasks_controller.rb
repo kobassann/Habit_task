@@ -1,7 +1,11 @@
 class Public::TasksController < ApplicationController
   def index
-    @task = Task.find(params[:id])
     @tasks = Task.all
+  end
+  
+  def show
+    @task = Task.find(params[:id])
+    
   end
 
   def update
@@ -21,12 +25,13 @@ class Public::TasksController < ApplicationController
   def create
     @member = current_member
     @task = Task.new(task_params)
-    @task.save
+    @task.member_id = current_member.id
+    @task.save!
     redirect_to member_path(@member)
   end
 
   private
   def task_params
-    params.require(:task).permit(:content, :memo, :start_time)
+    params.require(:task).permit(:content, :memo, :start_time, tag_ids: [])
   end
 end
