@@ -1,6 +1,8 @@
 class Public::TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @q = Task.ransack(params[:q])
+    @tasks = @q.result(distinct: true).order(created_at: :desc)
+    # @tasks = Task.all
   end
   
   def show

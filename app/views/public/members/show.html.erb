@@ -3,7 +3,7 @@
   <%= date.day %>
 
   <% tasks.each do |task| %>
-  <div><%= task.content %></div>
+  <div><%= link_to task.content, task_path(task.id) %></div>
   <% end %>
 <% end %>
 
@@ -16,9 +16,9 @@
       <%= f.datetime_select :start_time %>
     </div>
       <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-      <div class='form-group col-xs-9'>
-        <%= tag.label class: 'col-sm-2' do %>
-            <%= tag.check_box class: 'col-sm-3' %>
+      <div class='form-group'>
+        <%= tag.label do %>
+            <%= tag.check_box %>
             <%= tag.text %>
         <% end %>
       </div>
