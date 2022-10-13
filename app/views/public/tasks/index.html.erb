@@ -3,16 +3,16 @@
 
   <%= search_form_for @q, url: tasks_path do |f| %>
     <div class="form-group my-5">
-      <%= f.date_field :created_at_gteq,
+      <%= f.date_field :start_time_gteq,
                         include_blank: true %><span>〜</span>
 
-      <%= f.date_field :created_at_lteq_end_of_day,
+      <%= f.date_field :start_time_lteq_end_of_day,
                         include_blank: true %>
       <%= f.submit %>
     </div>
   <% end %>
   </div>
-  
+
 <h3>みんなのタスク</h3>
 
 <table class='table table-hover table-inverse'>
@@ -28,6 +28,18 @@
     <tr>
       <td><%= task.member.nickname %></td>
       <td><%= link_to task.content, task_path(task.id) %></td>
+      <td>
+        <% if current_member.already_favorited?(task) %>
+          <%= link_to task_favorite_path(task), method: :delete do %>
+            ♥<%= task.favorites.count %>
+          <% end %>
+
+        <% else %>
+          <%= link_to task_favorite_path(task), method: :post do %>
+           ♡<%= task.favorites.count %>
+          <% end %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>

@@ -4,11 +4,34 @@
   <tr>
     <td><%= @task.content %></td>
     <td><%= @task.memo %></td>
+    <td>
+      <p>コメント件数：<%= @task.comments.count %></p>
+    </td>
     <% if @task.member == current_member %>
       <td><%= link_to 'Edit', edit_task_path(@task.id), class: "btn btn-sm btn-success" %></td>
       <td><%= link_to 'Destroy', @task, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
     <% end %>
   </tr>
 </table>
+<table>
+<% @task.comments.each do |comment| %>
+  <tr>
+    <td>
+    <%= comment.member.nickname %>
+    <%= comment.comment_text %>
+      <% if comment.member == current_member %>
+        <%= link_to task_comment_path(comment.task, comment), method: :delete %>
+      <% end %>
+    <% end %>
+    </td>
+  </tr>
+</table>
+
+    <%= form_with model: [@task, @comment] do |f| %>
+ 
+      <%= f.text_area :comment_text, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+
 </div>
 

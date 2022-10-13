@@ -18,9 +18,10 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "homes/about" => "homes#about"
-    resources :tasks
-    resources :favorites, only: [:create, :index, :destroy]
-    resources :comments, only: [:create, :destroy]
+    resources :tasks do
+      resource :favorite, only: [:create, :index, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
     resources :members, only: [:show, :edit, :update]
     get 'members/unsubscribe' => 'members#unsubscribe'
     get 'members/withdraw' => 'members#withdraw'

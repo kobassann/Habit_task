@@ -1,4 +1,4 @@
 class Comment < ApplicationRecord
-  belongs_to :members
-  belongs_to :tasks
+  belongs_to :member
+  belongs_to :task
 end

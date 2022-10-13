@@ -7,4 +7,8 @@ class Member < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  def already_favorited?(task)
+    self.favorites.exists?(task_id: task.id)
+  end
 end
