@@ -11,6 +11,15 @@
       <%= f.submit %>
     </div>
   <% end %>
+
+    <div class="form-group">
+    <%= form_tag({controller:"tasks",action:"index"}, method: :get) do %>
+      <% Tag.all.each do |t| %>
+          <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+      <% end %>
+      <%= submit_tag '検索' %>
+    <% end %>
+    </div>
   </div>
 
 <h3>みんなのタスク</h3>
