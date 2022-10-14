@@ -1,12 +1,16 @@
 class Public::TasksController < ApplicationController
   def index
-    # @task = Task.all
-    # search_options = {
-    #   created_at_lteq_end_of_day: params[:created_at_lteq_end_of_day]
-      # created_at_gteq: params[:created_at_gteq]
-    # }
     @q = Task.ransack(params[:q])
     @tasks = @q.result(distinct: true).order(created_at: :desc)
+    
+    @task = Task.all
+    if params[:tag_ids]
+      @task = []
+      params[:tag_ids].each do |key, value|
+        @task += Tag.find_by(name: key).tasks if value == "1"
+      end
+      @task.uniq!
+    end
   end
 
   def show

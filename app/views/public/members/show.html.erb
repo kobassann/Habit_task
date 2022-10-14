@@ -1,4 +1,11 @@
-<h1>マイタスク</h1>
+<h3>マイタスク
+  <span><%= @member.nickname %>さん</span>
+  <%= link_to edit_member_path, class: "btn btn-sm btn-light" do %>
+  編集
+  <% end %>
+</h3>
+
+
 <%= month_calendar(events: @tasks) do |date, tasks| %>
   <%= date.day %>
 

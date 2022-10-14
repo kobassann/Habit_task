@@ -22,13 +22,12 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :index, :destroy]
       resources :comments, only: [:create, :destroy]
     end
-    resources :members, only: [:show, :edit, :update]
+
     get 'members/unsubscribe' => 'members#unsubscribe'
     get 'members/withdraw' => 'members#withdraw'
+    patch 'members/withdraw' => 'members#withdraw'
+    resources :members, only: [:show, :edit, :update]
   end
 
-  # root to: "homes#top"
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # get 'homes/top' => 'homes#top'
-  # get '/homes/about' => 'homes#about'
+
 end
