@@ -20,7 +20,11 @@ class Public::TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.update(task_params)
+    if@task.update(task_params)
+      redirect_to member_path
+    else
+      render :edit
+    end
   end
 
   def edit
@@ -30,6 +34,7 @@ class Public::TasksController < ApplicationController
   def destroy
      @task = Task.find(params[:id])
      @task.destroy
+     redirect_to member_path
   end
 
   def create
