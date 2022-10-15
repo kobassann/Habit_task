@@ -1,4 +1,6 @@
 class Public::TasksController < ApplicationController
+  # before_action :set_task, only: [:show, :edit, :update, :destroy]
+  
   def index
     @q = Task.ransack(params[:q])
     @tasks = @q.result(distinct: true).order(created_at: :desc)
@@ -11,6 +13,7 @@ class Public::TasksController < ApplicationController
       end
       @task.uniq!
     end
+    @task = params[:tag_id].present? ? Tag.find(params[:tag_id]).tasks : Task.all
   end
 
   def show

@@ -8,7 +8,17 @@ class Member < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :nickname, presence: true
+  validates :email, presence: true
+
   def already_favorited?(task)
     self.favorites.exists?(task_id: task.id)
   end
+  
+  # def self.guest
+  #   find_or_create_by!(name: 'guestmember' ,email: 'guest@example.com') do |member|
+  #     member.password = SecureRandom.urlsafe_base64
+  #     member = "guestmember"
+  #   end
+  # end
 end

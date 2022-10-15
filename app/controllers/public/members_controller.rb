@@ -25,8 +25,8 @@ class Public::MembersController < ApplicationController
 
   def withdraw
     @member = current_member
-    @member.update(status: true)
-    flash[:notice] = "退会処理を実行いたしました"
+    @member.destroy
+    flash[:notice] = "退会しました"
     redirect_to root_path
   end
   

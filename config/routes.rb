@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  
+  # devise_scope :member do
+  #   post 'members/guest_sign_in', to: 'members/sessions#guest_sign_in'
 
   scope module: :public do
     root to: 'homes#top'
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
 
     get 'members/unsubscribe' => 'members#unsubscribe'
     get 'members/withdraw' => 'members#withdraw'
-    patch 'members/withdraw' => 'members#withdraw'
+    delete 'members/withdraw' => 'members#withdraw'
     resources :members, only: [:show, :edit, :update]
   end
 
