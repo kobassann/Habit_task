@@ -1,19 +1,18 @@
 class Public::TasksController < ApplicationController
   # before_action :set_task, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @q = Task.ransack(params[:q])
+
     @tasks = @q.result(distinct: true).order(created_at: :desc)
-    
-    @task = Task.all
-    if params[:tag_ids]
-      @task = []
-      params[:tag_ids].each do |key, value|
-        @task += Tag.find_by(name: key).tasks if value == "1"
-      end
-      @task.uniq!
+
+    if params[:q].present? && params[:q][:tags_id_eq]
+      @select_index = params[:q][:tags_id_eq]
+    else
+      @select_index = 0
     end
-    @task = params[:tag_id].present? ? Tag.find(params[:tag_id]).tasks : Task.all
+
+    @task = Task.all
   end
 
   def show

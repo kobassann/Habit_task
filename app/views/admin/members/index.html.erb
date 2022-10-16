@@ -13,6 +13,7 @@
             <th>会員ID</th>
             <th>ニックネーム</th>
             <th>メールアドレス</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
           <td><%= member.id %></td>
           <td><%= link_to member.nickname, admin_member_path(member.id) %></td>
           <td><%= member.email %></td>
+          <td><%= link_to "削除", @member, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
         </tr>
         <% end %>
         </tbody>

@@ -5,10 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Admin.create!(
+  email: 'admin@hh',
+  password: '098765'
+  )
+
 Tag.create([
   { name: '筋トレ' },
   { name: 'ストレッチ' },
-  { name: 'ランニング' },
+  { name: '有酸素運動' },
   { name: 'スポーツ' },
-  { name: 'ウォーキング' }
+  { name: '体幹' },
+  { name: 'その他' }
 ])

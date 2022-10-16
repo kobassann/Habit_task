@@ -1,9 +1,10 @@
 class Public::MembersController < ApplicationController
    before_action :authenticate_member!
-   
+   before_action :ensure_guest_member
+
   def show
     @task = Task.new
-    @tasks = Task.all
+    @tasks = current_member.tasks
     @member = current_member
   end
 
@@ -29,9 +30,13 @@ class Public::MembersController < ApplicationController
     flash[:notice] = "退会しました"
     redirect_to root_path
   end
-  
+
   private
   def member_params
     params.require(:member).permit(:nickname, :email)
+  end
+
+  def ensure_guest_member
+    @member = Member.find(params[:id])
   end
 end

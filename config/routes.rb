@@ -9,14 +9,14 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
+  devise_scope :member do
+    post 'members/guest_sign_in', to: 'members/sessions#guest_sign_in'
+  end
   devise_for :members,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
-  # devise_scope :member do
-  #   post 'members/guest_sign_in', to: 'members/sessions#guest_sign_in'
+
 
   scope module: :public do
     root to: 'homes#top'
