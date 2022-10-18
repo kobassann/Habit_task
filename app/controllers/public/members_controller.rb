@@ -6,6 +6,8 @@ class Public::MembersController < ApplicationController
     @task = Task.new
     @tasks = current_member.tasks
     @member = current_member
+    @favorites = Favorite.all
+
   end
 
   def edit

@@ -14,11 +14,12 @@ class Member < ApplicationRecord
   def already_favorited?(task)
     self.favorites.exists?(task_id: task.id)
   end
-  
+
   def self.guest
     find_or_create_by!(nickname: 'guestmember' ,email: 'guest@example.com') do |member|
       member.password = SecureRandom.urlsafe_base64
       member.nickname = "guestmember"
     end
   end
+
 end

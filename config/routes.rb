@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     resources :tasks do
       resource :favorite, only: [:create, :index, :destroy]
       resources :comments, only: [:create, :destroy]
+      # resources :searches, only: :index
     end
+    get 'search' => 'searches#search'
 
     get 'members/unsubscribe' => 'members#unsubscribe'
     get 'members/withdraw' => 'members#withdraw'

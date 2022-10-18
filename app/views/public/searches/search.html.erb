@@ -1,27 +1,8 @@
 <div class="container">
   <div class="text-center">
   <h3>tasks</h3>
-  <%= form_tag tasks_path, method: :get, class: 'boards_searchForm' do %>
-  <% end %>
 
-  <%= search_form_for @q, url: tasks_path do |f| %>
-    <%= f.select :tags_id_eq,
-                  options_from_collection_for_select(Tag.all, :id, :name, @select_index),
-                  {
-                    prompt: 'タグで絞り込み検索',
-                    #onchange: 'submit(this.form);'
-                  }
-    %>
 
-    <div class="form-group my-5">
-      <%= f.date_field :start_time_gteq,
-                        include_blank: true %><span>〜</span>
-      <%= f.date_field :start_time_lteq_end_of_day,
-                        include_blank: true %>
-      <%= f.submit %>
-    </div>
-  <% end %>
-  
 
   </div>
 

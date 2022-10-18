@@ -3,7 +3,6 @@ class Public::TasksController < ApplicationController
 
   def index
     @q = Task.ransack(params[:q])
-
     @tasks = @q.result(distinct: true).order(created_at: :desc)
 
     if params[:q].present? && params[:q][:tags_id_eq]
@@ -45,6 +44,10 @@ class Public::TasksController < ApplicationController
     @task.member_id = current_member.id
     @task.save!
     redirect_to member_path(@member)
+  end
+
+  def search
+    @tasks = Task.search(params[:search])
   end
 
   private

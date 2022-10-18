@@ -6,5 +6,12 @@ class Task < ApplicationRecord
   has_many :tags, through: :task_tags, dependent: :destroy
 
   validates :content, presence: true
-
+  
+  def self.search(search)
+    if search
+      Task.where(['content Like ?', "%#{search}%"])
+    else
+      Task.all
+    end
+  end
 end

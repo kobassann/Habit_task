@@ -1,5 +1,6 @@
 class Admin::CommentsController < ApplicationController
   def index
+    @comments = Comment.all
   end
 
   def destroy
@@ -13,4 +14,5 @@ class Admin::CommentsController < ApplicationController
 
   def update
   end
+
 end

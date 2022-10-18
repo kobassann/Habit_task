@@ -1,7 +1,9 @@
-<h3>マイタスク
-  <span><%= @member["nickname"] %>さん</span>
-  <%= link_to edit_member_path, class: "btn btn-sm btn-light" do %>
-  編集
+<h3>
+  <span><%= @member["nickname"] %>のタスク</span>
+  <% if @member.nickname != "guestmember" %>
+    <%= link_to edit_member_path, class: "btn btn-sm btn-light" do %>
+    編集
+    <% end %>
   <% end %>
 </h3>
 
@@ -48,3 +50,18 @@
   <% end %>
   </div>
 </div>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>いいね</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorites.each do |favorite| %>
+    <tr>
+      <td><%= favorite.task.content %></td>
+    </tr>
+    <% end %>
+  </tbody>
