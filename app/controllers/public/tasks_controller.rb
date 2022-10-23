@@ -11,7 +11,7 @@ class Public::TasksController < ApplicationController
       @select_index = 0
     end
 
-    @task = Task.all
+    @task = Task.all.page(params[:page]).per(5)
   end
 
   def show
@@ -42,7 +42,7 @@ class Public::TasksController < ApplicationController
     @member = current_member
     @task = Task.new(task_params)
     @task.member_id = current_member.id
-    @task.save!
+    @task.save
     redirect_to member_path(@member)
   end
 

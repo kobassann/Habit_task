@@ -1,0 +1,14 @@
+<table class="table">
+  <% task.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.member.nickname %></td>
+    <td><%= comment.comment_text %></td>
+      <% if comment.member == current_member %>
+        <td><%= link_to task_comment_path(comment.task, comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" do %>
+        <span>削除</span>
+        <% end %>
+      <% end %>
+  <% end %>
+    </td>
+  </tr>
+</table>

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :set_time_zone, if: :member_signed_in?
+  #before_action :set_time_zone, if: :member_signed_in?
   before_action :set_beginning_of_week
 
   # def after_sign_in_path_for(resource)

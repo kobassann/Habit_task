@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text-center">
-  <h3>tasks</h3>
+  <h3></h3>
   <%= form_tag tasks_path, method: :get, class: 'boards_searchForm' do %>
   <% end %>
 
@@ -8,7 +8,7 @@
     <%= f.select :tags_id_eq,
                   options_from_collection_for_select(Tag.all, :id, :name, @select_index),
                   {
-                    prompt: 'タグで絞り込み検索',
+                    prompt: 'カテゴリーで絞り込み検索',
                     #onchange: 'submit(this.form);'
                   }
     %>
@@ -21,7 +21,7 @@
       <%= f.submit %>
     </div>
   <% end %>
-  
+
 
   </div>
 
@@ -31,8 +31,8 @@
   <thead>
     <tr>
       <th>ニックネーム</th>
+      <th>カテゴリー</th>
       <th>タスク</th>
-      <th>内容</th>
       <th></th>
     </tr>
   </thead>
@@ -46,21 +46,14 @@
       <% end %>
       <td><%= link_to task.content, task_path(task.id) %></td>
       <td>
-        <% if current_member.already_favorited?(task) %>
-          <%= link_to task_favorite_path(task), method: :delete do %>
-            ♥<%= task.favorites.count %>
-          <% end %>
-
-        <% else %>
-          <%= link_to task_favorite_path(task), method: :post do %>
-           ♡<%= task.favorites.count %>
-          <% end %>
-        <% end %>
+        <div id="favorite_buttons_<%= task.id %>">
+          <%= render "public/favorites/favorites", task: task  %>
+        </div>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
-
+<%= paginate @task %>
 </div>
 

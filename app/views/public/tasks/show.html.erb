@@ -10,19 +10,11 @@
     <td><%= @task.content %></td>
     <td><%= @task.memo %></td>
     <td>
-        <% if current_member.already_favorited?(@task) %>
-          <%= link_to task_favorite_path(@task), method: :delete do %>
-            ♥<%= @task.favorites.count %>
-          <% end %>
-
-        <% else %>
-          <%= link_to task_favorite_path(@task), method: :post do %>
-           ♡<%= @task.favorites.count %>
-          <% end %>
-        <% end %>
-    <td>
-      <p>コメント件数：<%= @task.comments.count %></p>
+      <div id="favorite_buttons_<%= @task.id %>">
+        <%= render "public/favorites/favorites", task: @task %>
+      </div>
     </td>
+    <td>コメント件数：<%= @task.comments.count %></td>
     <% if @task.member == current_member %>
       <td><%= link_to 'Edit', edit_task_path(@task.id), class: "btn btn-sm btn-success" %></td>
       <td><%= link_to 'Destroy', @task, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
@@ -30,23 +22,13 @@
   </tr>
 </table>
 
-<table class="table">
-  <% @task.comments.each do |comment| %>
-  <tr>
-    <td><%= comment.member.nickname %></td>
-    <td><%= comment.comment_text %></td>
-      <% if comment.member == current_member %>
-        <td><%= link_to task_comment_path(comment.task, comment), method: :delete, class: "btn btn-sm btn-danger" do %>
-        <span>削除</span>
-        <% end %>
-      <% end %>
-  <% end %>
-    </td>
-  </tr>
-</table>
-    <%= form_with model: [@task, @comment] do |f| %>
-      <%= f.text_area :comment_text, rows: '5', placeholder: "コメントをここに", size: "40x5" %>
-      <%= f.submit "送信する" %>
-    <% end %>
+<div id="comments">
+  <%= render "public/comments/comments", task: @task %>
+</div>
+<% unless @task.member == current_member %>
+<div id="comments_area">
+  <%= render "public/comments/form", task: @task, comment: @comment %>
+</div>
+<% end %>
 </div>
 

@@ -10,7 +10,7 @@ module HealthHabits
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    
+
     config.i18n.available_locales = :ja
     config.i18n.default_locale = :ja
     # Configuration for the application, engines, and railties goes here.
@@ -18,7 +18,8 @@ module HealthHabits
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'Asia/Tokyo'
+    config.active_record.default_timezone = :local
     # config.beginning_of_week = :sunday
     # config.eager_load_paths << Rails.root.join("extras")
   end

@@ -1,13 +1,12 @@
 class Public::MembersController < ApplicationController
    before_action :authenticate_member!
-   before_action :ensure_guest_member
+   before_action :ensure_guest_member, only: [:edit]
 
   def show
     @task = Task.new
     @tasks = current_member.tasks
     @member = current_member
     @favorites = Favorite.all
-
   end
 
   def edit
@@ -28,9 +27,14 @@ class Public::MembersController < ApplicationController
 
   def withdraw
     @member = current_member
+    #if @user.email == 'guest@example.com'
+    #   reset_session
+    #   redirect_to :root
+    # else
     @member.destroy
     flash[:notice] = "退会しました"
     redirect_to root_path
+    # end
   end
 
   private
@@ -41,4 +45,5 @@ class Public::MembersController < ApplicationController
   def ensure_guest_member
     @member = Member.find(params[:id])
   end
+
 end
