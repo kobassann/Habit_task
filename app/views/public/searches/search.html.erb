@@ -1,47 +1,43 @@
 <div class="container">
   <div class="text-center">
-  <h3>tasks</h3>
 
+  <h3 class="my-3">検索結果</h3>
 
+  <table class='table table-hover'>
+    <thead>
+      <tr>
+        <th>ニックネーム</th>
+        <th>カテゴリー</th>
+        <th>タスク</th>
+        <th>内容</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  </div>
-
-<h3>みんなのタスク</h3>
-
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th>ニックネーム</th>
-      <th>タスク</th>
-      <th>内容</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.member.nickname %></td>
-      <% task.tags.each do |tag| %>
-      <td><%= tag.name %></td>
-      <% end %>
-      <td><%= link_to task.content, task_path(task.id) %></td>
-      <td>
-        <% if current_member.already_favorited?(task) %>
-          <%= link_to task_favorite_path(task), method: :delete do %>
-            ♥<%= task.favorites.count %>
-          <% end %>
-
-        <% else %>
-          <%= link_to task_favorite_path(task), method: :post do %>
-           ♡<%= task.favorites.count %>
-          <% end %>
+    <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.member.nickname %></td>
+        <% task.tags.each do |tag| %>
+        <td><%= tag.name %></td>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        <td><%= link_to task.content, task_path(task.id) %></td>
+        <td>
+          <% if current_member.already_favorited?(task) %>
+            <%= link_to task_favorite_path(task), method: :delete do %>
+              ♥<%= task.favorites.count %>
+            <% end %>
 
+          <% else %>
+            <%= link_to task_favorite_path(task), method: :post do %>
+             ♡<%= task.favorites.count %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
 </div>
 

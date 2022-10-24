@@ -1,1 +1,2 @@
-$("#comments_area").html("<%= j(render 'public/comments/comments', task: @task,comment: @comment) %>");
+$("#comments").html("<%= j(render 'public/comments/comments', task: @task,comment: @comment) %>");
+$("#comment_count").text('<%= @task.comments.count %>');

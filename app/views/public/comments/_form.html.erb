@@ -1,4 +1,5 @@
   <%= form_with model: [task, comment], local: false do |f| %>
-  <%= f.text_area :comment_text, rows: '5', placeholder: "コメントをここに", size: "40x5" %>
-  <%= f.submit "送信する" %>
+  <%= f.text_area :comment_text, rows: '5', placeholder: "コメントをしましょう！", size: "40x5" %>
+  <%= f.hidden_field :task_id, value: task.id %>
+  <p><%= f.submit "送信する" %></p>
   <% end %>
