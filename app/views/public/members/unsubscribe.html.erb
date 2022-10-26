@@ -1,9 +1,11 @@
 <div class="container my-5">
   <div class="text-center">
-    <h1>退会してよろしいですか？</h1>
-    <p>退会すると現在のアカウントは使用できなくなります。
-    <br>再度ログインする場合は新規登録からお願いいたします。
-    </p>
-    <%= link_to "退会する", members_withdraw_path, class: "btn btn-danger" %>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h1>退会してよろしいですか？</h1>
+      <p>退会すると現在のアカウントは使用できなくなります。
+      <br>再度ログインする場合は新規登録からお願いいたします。
+      </p>
+      <%= link_to "退会する", members_withdraw_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+    </div>
   </div>
 </div>

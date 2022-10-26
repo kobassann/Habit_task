@@ -27,14 +27,14 @@ class Public::MembersController < ApplicationController
 
   def withdraw
     @member = current_member
-    #if @user.email == 'guest@example.com'
-    #   reset_session
-    #   redirect_to :root
-    # else
+    if @member.email == 'guest@example.com'
+      reset_session
+      redirect_to :root
+    else
     @member.destroy
     flash[:notice] = "退会しました"
     redirect_to root_path
-    # end
+    end
   end
 
   private

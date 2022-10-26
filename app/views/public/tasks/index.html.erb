@@ -1,59 +1,59 @@
 <div class="container">
   <div class="text-center">
-  <h3 class="my-3">タスクを探す</h3>
-  <%= form_tag tasks_path, method: :get, class: 'boards_searchForm' do %>
-  <% end %>
-
-  <%= search_form_for @q, url: tasks_path do |f| %>
-    <%= f.select :tags_id_eq,
-                  options_from_collection_for_select(Tag.all, :id, :name, @select_index),
-                  {
-                    prompt: 'カテゴリーで絞り込み検索',
-                    #onchange: 'submit(this.form);'
-                  }
-    %>
-
-    <div class="form-group my-5">
-      <%= f.date_field :start_time_gteq,
-                        include_blank: true %><span>〜</span>
-      <%= f.date_field :start_time_lteq_end_of_day,
-                        include_blank: true %>
-      <%= f.submit %>
-    </div>
-  <% end %>
-
-
-  </div>
-
-<h3>みんなのタスク</h3>
-
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th>ニックネーム</th>
-      <th>カテゴリー</th>
-      <th>タスク</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <% @tasks.each do |task| %>
-    <tr>
-      <td><%= task.member.nickname %></td>
-      <% task.tags.each do |tag| %>
-      <td><%= tag.name %></td>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h3 class="my-3">タスクを探す</h3>
+      <%= form_tag tasks_path, method: :get, class: 'boards_searchForm' do %>
       <% end %>
-      <td><%= link_to task.content, task_path(task.id) %></td>
-      <td>
-        <div id="favorite_buttons_<%= task.id %>">
-          <%= render "public/favorites/favorites", task: task  %>
+
+      <%= search_form_for @q, url: tasks_path do |f| %>
+        <%= f.select :tags_id_eq,
+                      options_from_collection_for_select(Tag.all, :id, :name, @select_index),
+                      {
+                        prompt: 'カテゴリーで絞り込み検索',
+                      }
+        %>
+
+        <div class="form-group my-5">
+          <%= f.date_field :start_time_gteq,
+                            include_blank: true %><span>〜</span>
+          <%= f.date_field :start_time_lteq_end_of_day,
+                            include_blank: true %>
+          <%= f.submit %>
         </div>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<%= paginate @task %>
+      <% end %>
+
+
+      <h3 class="mb-3">みんなのタスク</h3>
+
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>ニックネーム</th>
+            <th>カテゴリー</th>
+            <th>タスク</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td><%= task.member.nickname %></td>
+            <% task.tags.each do |tag| %>
+            <td><%= tag.name %></td>
+            <% end %>
+            <td><%= link_to task.content, task_path(task.id) %></td>
+            <td>
+              <div id="favorite_buttons_<%= task.id %>">
+                <%= render "public/favorites/favorites", task: task  %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @task %>
+    </div>
+  </div>
 </div>
 

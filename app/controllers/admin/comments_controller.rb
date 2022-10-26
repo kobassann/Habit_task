@@ -1,18 +1,14 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
-    @comments = Comment.all
+    @comments = Comment.all.page(params[:page]).per(5)
   end
 
   def destroy
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to admin_comments_path
   end
 
 end

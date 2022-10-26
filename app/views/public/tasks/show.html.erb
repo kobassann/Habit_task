@@ -1,49 +1,51 @@
 <div class="container">
-<h3 class="my-3">タスク詳細</h3>
-<table class="table">
-  <thead>
-    <tr class="bg-info">
-      <th>カテゴリー</th>
-      <th>タスク</th>
-      <th>内容</th>
-      <th>実施日時</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <% @task.tags.each do |tag| %>
-          <%= tag.name %>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+  <h3 class="my-3">タスク詳細</h3>
+  <table class="table">
+    <thead>
+      <tr class="bg-info">
+        <th>カテゴリー</th>
+        <th>タスク</th>
+        <th>内容</th>
+        <th>実施日時</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <% @task.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %>
+        </td>
+        <td><%= @task.content %></td>
+        <td><%= @task.memo %></td>
+        <td><%= @task.start_time.strftime("%m月%d日 %H:%M") %></td>
+        <td>
+          <div id="favorite_buttons_<%= @task.id %>">
+            <%= render "public/favorites/favorites", task: @task %>
+          </div>
+        </td>
+        <td>コメント件数：<span id="comment_count"><%= @task.comments.count %></span></td>
+        <% if @task.member == current_member %>
+          <td><%= link_to '編集', edit_task_path(@task.id), class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to '削除', @task, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
         <% end %>
-      </td>
-      <td><%= @task.content %></td>
-      <td><%= @task.memo %></td>
-      <td><%= @task.start_time.strftime("%m月%d日 %H:%M") %></td>
-      <td>
-        <div id="favorite_buttons_<%= @task.id %>">
-          <%= render "public/favorites/favorites", task: @task %>
-        </div>
-      </td>
-      <td>コメント件数：<span id="comment_count"><%= @task.comments.count %></span></td>
-      <% if @task.member == current_member %>
-        <td><%= link_to '編集', edit_task_path(@task.id), class: "btn btn-sm btn-success" %></td>
-        <td><%= link_to '削除', @task, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-<h5>コメント一覧</h5>
-<div id="comments">
-  <%= render "public/comments/comments", task: @task %>
-</div>
-<% unless @task.member == current_member %>
-<div id="comments_area">
-  <%= render "public/comments/form", task: @task, comment: @comment %>
-</div>
-<% end %>
+      </tr>
+    </tbody>
+  </table>
+  <h5>コメント一覧</h5>
+  <div id="comments">
+    <%= render "public/comments/comments", task: @task %>
+  </div>
+  <% unless @task.member == current_member %>
+  <div id="comments_area">
+    <%= render "public/comments/form", task: @task, comment: @comment %>
+  </div>
+  <% end %>
+  </div>
 </div>
 
