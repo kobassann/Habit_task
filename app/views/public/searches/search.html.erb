@@ -22,17 +22,11 @@
             <% end %>
             <td><%= link_to task.content, task_path(task.id) %></td>
             <td>
-              <% if current_member.already_favorited?(task) %>
-                <%= link_to task_favorite_path(task), method: :delete do %>
-                  ♥<%= task.favorites.count %>
-                <% end %>
-
-              <% else %>
-                <%= link_to task_favorite_path(task), method: :post do %>
-                 ♡<%= task.favorites.count %>
-                <% end %>
-              <% end %>
+              <div id="favorite_buttons_<%= task.id %>">
+                <%= render "public/favorites/favorites", task: task %>
+              </div>
             </td>
+            <td><i class="far fa-comment-dots"></i><span id="comment_count"><%= task.comments.count %></span></td>
           </tr>
         <% end %>
         </tbody>

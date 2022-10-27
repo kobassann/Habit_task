@@ -1,8 +1,4 @@
 class Public::FavoritesController < ApplicationController
-  def index
-    @favorites = Favorite.page(params[:page])
-  end
-
   def create
     @task = Task.find(params[:task_id])
     @favorite = current_member.favorites.create(task_id: params[:task_id])

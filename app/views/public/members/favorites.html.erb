@@ -1,2 +1,39 @@
-<h3>www</h3>
-<%= @tasks.inspect %>
+<div class="container">
+  <div class="text-center">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h3 class="my-3">いいね一覧</h3>
+
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>ニックネーム</th>
+            <th>カテゴリー</th>
+            <th>タスク</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td><%= task.member.nickname %></td>
+            <td>
+              <% task.tags.each do |tag| %>
+              <%= tag.name %>
+              <% end %>
+            </td>
+            <td><%= link_to task.content, task_path(task.id) %></td>
+            <td>
+              <div id="favorite_buttons_<%= task.id %>">
+                <%= render "public/favorites/favorites", task: task  %>
+              </div>
+            </td>
+            <td><i class="far fa-comment-dots"></i><span id="comment_count"><%= task.comments.count %></span></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
