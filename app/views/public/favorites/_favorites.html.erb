@@ -1,10 +1,10 @@
 <% if current_member.already_favorited?(task) %>
-  <%= link_to task_favorite_path(task), method: :delete, remote: true do %>
+  <%= link_to task_favorites_path(task), method: :delete, remote: true do %>
     ♥<%= task.favorites.count %>
   <% end %>
 
 <% else %>
-  <%= link_to task_favorite_path(task), method: :post, remote: true do %>
+  <%= link_to task_favorites_path(task), method: :post, remote: true do %>
    ♡<%= task.favorites.count %>
   <% end %>
 <% end %>

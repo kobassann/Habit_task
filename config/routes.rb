@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get "homes/about" => "homes#about"
     resources :tasks do
-      resource :favorite, only: [:create, :index, :destroy]
+      resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
     get 'search' => 'searches#search'
@@ -30,7 +30,11 @@ Rails.application.routes.draw do
     get 'members/unsubscribe' => 'members#unsubscribe'
     get 'members/withdraw' => 'members#withdraw'
     delete 'members/withdraw' => 'members#withdraw'
-    resources :members, only: [:show, :edit, :update]
+    resources :members, only: [:show, :edit, :update] do
+      member do
+        get "favorites"
+      end
+    end
   end
 
 

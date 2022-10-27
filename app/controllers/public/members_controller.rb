@@ -36,6 +36,11 @@ class Public::MembersController < ApplicationController
     redirect_to root_path
     end
   end
+  
+  def favorites
+    @member = Member.find(params[:id])
+    @tasks = @member.favorite_tasks
+  end
 
   private
   def member_params

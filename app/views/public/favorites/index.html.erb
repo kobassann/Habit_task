@@ -1,2 +1,32 @@
-<h1>Public::Favorites#index</h1>
-<p>Find me in app/views/public/favorites/index.html.erb</p>
+<div class="container">
+  <div class="text-center">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h3 class="my-3">いいね</h3>
+
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>ニックネーム</th>
+            <th>カテゴリー</th>
+            <th>タスク</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @favorites.each do |favorite| %>
+          <tr>
+            <td><%= favorite.task.member.nickname %></td>
+            <td>
+              <% favorite.task.tags.each do |tag| %>
+              <%= tag.name %>
+              <% end %>
+            </td>
+            <td><%= favorite.task.content %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= paginate @favorites %>
+    </div>
+  </div>
+</div>
