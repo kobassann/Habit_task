@@ -40,9 +40,15 @@
         <% @tasks.each do |task| %>
           <tr>
             <td><%= task.member.nickname %></td>
-            <% task.tags.each do |tag| %>
-            <td><%= tag.name %></td>
-            <% end %>
+            <td>
+              <% task.tags.each_with_index do |tag, index| %>
+                <% if index == 0 %>
+                  <%= tag.name %>
+                <% else %>
+                  /<%= tag.name %>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= link_to task.content, task_path(task.id) %></td>
             <td>
               <div id="favorite_buttons_<%= task.id %>">

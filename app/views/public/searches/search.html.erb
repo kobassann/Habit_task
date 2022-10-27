@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text-center">
-    <div class="col-md-10 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
       <h3 class="my-3">検索結果</h3>
       <table class='table table-hover'>
         <thead>
@@ -8,7 +8,7 @@
             <th>ニックネーム</th>
             <th>カテゴリー</th>
             <th>タスク</th>
-            <th>内容</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -17,9 +17,15 @@
         <% @tasks.each do |task| %>
           <tr>
             <td><%= task.member.nickname %></td>
-            <% task.tags.each do |tag| %>
-            <td><%= tag.name %></td>
-            <% end %>
+            <td>
+              <% task.tags.each_with_index do |tag, index| %>
+                <% if index == 0 %>
+                  <%= tag.name %>
+                <% else %>
+                  /<%= tag.name %>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= link_to task.content, task_path(task.id) %></td>
             <td>
               <div id="favorite_buttons_<%= task.id %>">
