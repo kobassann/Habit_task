@@ -1,13 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+
 .main-content {
   background-image: url('../images/sozai_image_161779.png');
   height:800px;
 }
 
 .simple-calendar {
- .day {}
+ .day {
+   width:30px;
+ }
  .wday-0 {
    color: red;
  }
