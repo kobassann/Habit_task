@@ -1,7 +1,7 @@
 ja:
   simple_calendar:
-    previous: "<<"
-    next: ">>"
+    previous: "先月 <"
+    next: "> 来月"
 
   views:
     pagination:

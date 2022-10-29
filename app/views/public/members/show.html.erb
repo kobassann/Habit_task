@@ -51,7 +51,7 @@
         <%= date.day %>
 
         <% tasks.each do |task| %>
-        <div><%= link_to task.content, task_path(task.id), class: "text-dark" %></div>
+        <div><%= link_to task.content, task_path(task.id), class: "text-dark", style:"overflow-wrap: anywhere" %></div>
         <% end %>
       <% end %>
     </div>

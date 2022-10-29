@@ -17,8 +17,12 @@
     <tbody>
       <tr>
         <td>
-          <% @task.tags.each do |tag| %>
-            <%= tag.name %>
+          <% @task.tags.each_with_index do |tag, index| %>
+            <% if index == 0 %>
+              <%= tag.name %>
+            <% else %>
+              /<%= tag.name %>
+            <% end %>
           <% end %>
         </td>
         <td><%= @task.content %></td>

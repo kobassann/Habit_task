@@ -6,10 +6,10 @@
   background-image: url('../images/sozai_image_161779.png');
   height:800px;
 }
-
 .simple-calendar {
  .day {
-   width:30px;
+    resize: vertical;
+    width:30px;
  }
  .wday-0 {
    color: red;

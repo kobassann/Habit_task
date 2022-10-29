@@ -1,9 +1,8 @@
 class Public::TasksController < ApplicationController
-  # before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true).order(created_at: :desc)
+    @tasks = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
 
     if params[:q].present? && params[:q][:tags_id_eq]
       @select_index = params[:q][:tags_id_eq]
@@ -11,7 +10,7 @@ class Public::TasksController < ApplicationController
       @select_index = 0
     end
 
-    @task = Task.all.page(params[:page]).per(5)
+    @task = Task.all
   end
 
   def show
@@ -39,11 +38,15 @@ class Public::TasksController < ApplicationController
   end
 
   def create
-    @member = current_member
-    @task = Task.new(task_params)
-    @task.member_id = current_member.id
-    @task.save
-    redirect_to member_path(@member)
+    if params[:task][:tag_ids] == [""]
+      redirect_to member_path(current_member)
+    else
+      @member = current_member
+      @task = Task.new(task_params)
+      @task.member_id = current_member.id
+      @task.save
+      redirect_to member_path(@member)
+    end
   end
 
   def search
