@@ -1,5 +1,6 @@
 class Public::TasksController < ApplicationController
-
+  before_action :authenticate_member!
+  
   def index
     @q = Task.ransack(params[:q])
     @tasks = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
