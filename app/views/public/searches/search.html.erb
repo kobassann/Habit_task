@@ -14,27 +14,27 @@
         </thead>
 
         <tbody>
-        <% @tasks.each do |task| %>
-          <tr>
-            <td><%= task.member.nickname %></td>
-            <td>
-              <% task.tags.each_with_index do |tag, index| %>
-                <% if index == 0 %>
-                  <%= tag.name %>
-                <% else %>
-                  /<%= tag.name %>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= task.member.nickname %></td>
+              <td>
+                <% task.tags.each_with_index do |tag, index| %>
+                  <% if index == 0 %>
+                    <%= tag.name %>
+                  <% else %>
+                    /<%= tag.name %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </td>
-            <td><%= link_to task.content, task_path(task.id) %></td>
-            <td>
-              <div id="favorite_buttons_<%= task.id %>">
-                <%= render "public/favorites/favorites", task: task %>
-              </div>
-            </td>
-            <td><i class="far fa-comment-dots"></i><span id="comment_count"><%= task.comments.count %></span></td>
-          </tr>
-        <% end %>
+              </td>
+              <td><%= link_to task.content, task_path(task.id) %></td>
+              <td>
+                <div id="favorite_buttons_<%= task.id %>">
+                  <%= render "public/favorites/favorites", task: task %>
+                </div>
+              </td>
+              <td><i class="far fa-comment-dots"></i><span id="comment_count"><%= task.comments.count %></span></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
       <%= paginate @tasks %>

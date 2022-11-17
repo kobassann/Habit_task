@@ -32,7 +32,6 @@ class Public::MembersController < ApplicationController
       redirect_to :root
     else
     @member.destroy
-    flash[:notice] = "退会しました"
     redirect_to root_path
     end
   end

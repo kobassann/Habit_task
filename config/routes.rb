@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'homes#top'
     resources :members
     resources :comments
   end
@@ -28,7 +27,6 @@ Rails.application.routes.draw do
     get 'search' => 'searches#search'
 
     get 'members/unsubscribe' => 'members#unsubscribe'
-    get 'members/withdraw' => 'members#withdraw'
     delete 'members/withdraw' => 'members#withdraw'
     resources :members, only: [:show, :edit, :update] do
       member do

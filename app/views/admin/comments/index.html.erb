@@ -20,13 +20,13 @@
 
         <tbody>
         <% @comments.each do |comment| %>
-        <tr>
-          <td><%= comment.task.start_time.strftime("%m月%d日 %H:%M") %></td>
-          <td><%= comment.task.member.nickname %></td>
-          <td><%= comment.member.nickname %></td>
-          <td><%= comment.comment_text %></td>
-          <td><%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
-        </tr>
+          <tr>
+            <td><%= comment.task.start_time.strftime("%m月%d日 %H:%M") %></td>
+            <td><%= comment.task.member.nickname %></td>
+            <td><%= comment.member.nickname %></td>
+            <td><%= comment.comment_text %></td>
+            <td><%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
+          </tr>
         <% end %>
         </tbody>
       </table>
